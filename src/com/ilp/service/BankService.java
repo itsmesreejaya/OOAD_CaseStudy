@@ -65,7 +65,7 @@ public class BankService {
 		for(Service services:defaultServiceList) {
 			System.out.println("\nThe services you chose are: \nserivice code:"+services.getServiceCode()+"\nService name:"+services.getServiceName()+"\nService rate: "+services.getRate());
 		}
-		System.out.println("\n1.Savings Max Account \r\n"+ "\r\n"+ "2.Current Account  \r\n"+ "\r\n"+ "3.Loan Account"+"\n Enter the product you want\r\n");
+		System.out.println("\n1.Savings Max Account \r\n"+ "\r\n"+ "2.Current Account  \r\n"+ "\r\n"+ "3.Loan Account"+"\n\r\n Enter the product you want\r\n");
 		int userChoice=scanner.nextInt();
 		System.out.println("\nProduct Code : - ");
 		String productCode = scanner.nextLine();
@@ -75,7 +75,7 @@ public class BankService {
 		if(userChoice==1)
 		{
 			SavingsMaxAccount savingsMaxAccount = new SavingsMaxAccount(productCode, productName, defaultServiceList);
-			System.out.println("\nSavings Max Account Created\n"+savingsMaxAccount.getserviceList());
+			System.out.println("\nSavings Max Account Created\n");
 			product = savingsMaxAccount;
 		}
 		else if (userChoice==2)
@@ -90,10 +90,7 @@ public class BankService {
 			System.out.println("\nLoans Account Created\n");
 			product = loanAccount;
 		}
-//		for(Service service : serviceList) {
-//			Product product = new Product( productCode,  productName, serviceList);
-//			product.addService(service);
-//		}
+
 		return product;
 	}
 	
@@ -102,6 +99,10 @@ public class BankService {
 
 	public static Customer createCustomer(ArrayList<Product> productList) {
 		Scanner scanner = new Scanner(System.in);
+		for (Product products:productList) {
+		
+		System.out.println(products);
+		}
 		System.out.println("\nEnter customer name:");
 		String customerName = scanner.nextLine();
 		
@@ -110,16 +111,8 @@ public class BankService {
 		
 		char customerChoice = 'y';
 		ArrayList<Account> accountList = new ArrayList<Account>() ;
-		
-			
-//			String productCode = null;
-//			System.out.println("\nEnter account no:");
-//			String accountNo = scanner.nextLine();
-//			System.out.println("\nEnter account balance:");
-//			double accountBalance = scanner.nextDouble();
-//			scanner.nextLine();
+		Product product = new Product("","",null);
 			do {
-				Product product= null;
 				System.out.println("\nEnter account no:");
 				String accountNo = scanner.nextLine();
 				System.out.println("\nEnter account balance:");
@@ -150,16 +143,11 @@ public class BankService {
 		for(Account account:customer.getAccounts()) {
 			System.out.println("\nName of product you chose:"+account.getProduct().getProductName());
 			for(Service service : account.getProduct().getserviceList()) {
-				System.out.println("\nServices you chose are\n\n"+service.getServiceName());
-
+				System.out.println("\nServices you chose are\n"+service.getServiceName());
 			}
 		}
 		return customer;
 		}
-
-
-
-
 
 
 	public static void manageAccounts(Customer customer) {
@@ -189,7 +177,7 @@ public class BankService {
 								if(accounts.getProduct() instanceof LoanAccount) 
 								{
 									LoanAccount loanAccount = (LoanAccount) account.getProduct();
-									System.out.println("\nDo you want to deposit through \n1.cash \n2.cheque?");
+									System.out.println("\nDo you want to deposit through \n1.cash \n2.cheque? ");
 									int choice = scanner.nextInt();
 									switch(choice)
 									{
@@ -204,8 +192,6 @@ public class BankService {
 								account.setBalance(account.getBalance()+depositMoney);
 							}						
 						}
-						
-						
 						break;
 					case 2:
 						System.out.println("\nEnter the amount you want to withdraw:");
@@ -226,7 +212,7 @@ public class BankService {
 								{
 									System.out.println("\nMoney withdrawed!!");
 									account.setBalance(account.getBalance()- withdrawMoney);
-									System.out.println("\nYour account balance is"+account.getBalance());
+									System.out.println("\nYour account balance is :"+account.getBalance());
 								}
 							}
 						}
@@ -235,7 +221,7 @@ public class BankService {
 					case 3:
 						for(Account accounts:customer.getAccounts()) 
 						{
-							System.out.println("\nDetails of all accounts: ");
+							System.out.println("\nDetails of all accounts:\n\n\r ");
 							System.out.println("\nAccount number:"+accounts.getAccountNo()+"\nAccount Type:"+accounts.getAccountType()+"\nAccount Balance: "+accounts.getBalance());
 							for(Service service:accounts.getProduct().getserviceList()) 
 							{
@@ -261,11 +247,6 @@ public class BankService {
 		
  }
 	
-	
-	
-	
-	
-
 }
 	
 
